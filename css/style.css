@@ -146,8 +146,8 @@ img {
 }
 
 /* ---------------------------------------------
-header -----------------------------------------
-*/
+header
+-----------------------------------------------*/
 .header {
   padding: 20px 15px;
   position: absolute;
@@ -294,6 +294,41 @@ About Section
   width: 100%;
   border: 10px solid transparent;
   border-radius: 5px;
+}
+
+.about-section .about-img .social-links {
+  margin-top: 20px;
+  text-align: center;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.about-section .about-img .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  font-size: 16px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  line-height: 40px;
+  color: var(--text-black-600);
+  margin: 0 4px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.about-section .about-img .social-links a i {
+  line-height: 40px;
+}
+
+.about-section .about-img .social-links a:after {
+  border-radius: 50%;
+}
+
+.about-section .about-img .social-links a:hover {
+  color: var(--skin-color);
 }
 
 .about-section .about-info {
