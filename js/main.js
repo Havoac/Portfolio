@@ -31,13 +31,26 @@ About Section Tabs Start
   ---------------------------------------------------*/
 
 /*---------------------------------------------------
- Portfolio Filter Items 
+ Portfolio Filter Items and PopUp
  ---------------------------------------------------*/
+
+function bodyScrollingToggle() {
+  document.body.classList.toggle('hidden-scrolling');
+}
+
 (function () {
   const filterContainer = document.querySelector('.portfolio-filter');
   const portfolioItemsContainer = document.querySelector('.portfolio-items');
   const portfolioItems =
     portfolioItemsContainer.querySelectorAll('.portfolio-item');
+  const popup = document.querySelector('.portfolio-popup');
+  const prevBtn = popup.querySelector('.pp-prev');
+  const nextBtn = popup.querySelector('.pp-next');
+  const closeBtn = popup.querySelector('.pp-close');
+  const projectDetailsContainer = popup.querySelector('.pp-details');
+  const projectDetailsBtn = popup.querySelector('.pp-project-details-btn');
+
+  let itemIndex, slideIndex, screenshots;
 
   /* Filter Portfolio Items */
   filterContainer.addEventListener('click', function (event) {
@@ -64,7 +77,128 @@ About Section Tabs Start
       });
     }
   });
+
+  portfolioItemsContainer.addEventListener('click', function (event) {
+    if (event.target.closest('.portfolio-item-inner')) {
+      const portfolioItem = event.target.closest(
+        '.portfolio-item-inner'
+      ).parentElement;
+
+      //Get the indexes of the Projects
+      itemIndex = Array.from(portfolioItem.parentElement.children).indexOf(
+        portfolioItem
+      );
+
+      //Get the Screenshots of the Project
+      screenshots = portfolioItems[itemIndex]
+        .querySelector('.portfolio-item-img img')
+        .getAttribute('data-screenshot');
+
+      screenshots = screenshots.split(',');
+
+      //If the project has only 1 photo
+      if (screenshots.length === 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'block';
+      }
+
+      slideIndex = 0;
+
+      popupToggle();
+      popupSlideshow();
+      popupDetails();
+    }
+  });
+
+  closeBtn.addEventListener('click', function () {
+    popupToggle();
+  });
+
+  function popupToggle() {
+    popup.classList.toggle('open');
+    bodyScrollingToggle();
+  }
+
+  function popupSlideshow() {
+    const imgSrc = screenshots[slideIndex];
+    const popupImg = popup.querySelector('.pp-img');
+
+    popupImg.src = imgSrc;
+
+    popup.querySelector('.pp-counter').innerHTML =
+      slideIndex + 1 + 'of' + screenshots.length;
+  }
+
+  //Next Slide
+  nextBtn.addEventListener('click', function () {
+    if (slideIndex === screenshots.length - 1) {
+      slideIndex = 0;
+    } else {
+      slideIndex++;
+    }
+    popupSlideshow();
+  });
+
+  //Previous Slide
+  prevBtn.addEventListener('click', function () {
+    if (slideIndex === 0) {
+      slideIndex = screenshots.length - 1;
+    } else {
+      slideIndex--;
+    }
+    popupSlideshow();
+  });
+
+  function popupDetails() {
+    //Get the Project Details
+    const details = portfolioItems[itemIndex].querySelector(
+      '.portfolio-item-details'
+    ).innerHTML;
+
+    const title = portfolioItems[itemIndex].querySelector(
+      '.portfolio-item-title'
+    ).innerHTML;
+
+    const category = portfolioItems[itemIndex].getAttribute('data-category');
+
+    //Replacing the details of pop-up with the actual project details
+    popup.querySelector('.pp-project-details').innerHTML = details;
+
+    popup.querySelector('.pp-title h2').innerHTML = title;
+
+    popup.querySelector('.pp-project-category').innerHTML = category
+      .split('-')
+      .join(' ');
+  }
+
+  projectDetailsBtn.addEventListener('click', function () {
+    popupDetailsToggle();
+  });
+
+  function popupDetailsToggle() {
+    if (projectDetailsContainer.classList.contains('active')) {
+      projectDetailsBtn.querySelector('i').classList.remove('fa-minus');
+
+      projectDetailsBtn.querySelector('i').classList.add('fa-plus');
+
+      projectDetailsContainer.classList.remove('active');
+      projectDetailsContainer.style.maxHeight = 0 + 'px';
+    } else {
+      projectDetailsBtn.querySelector('i').classList.remove('fa-plus');
+
+      projectDetailsBtn.querySelector('i').classList.add('fa-minus');
+
+      projectDetailsContainer.classList.add('active');
+      projectDetailsContainer.style.maxHeight =
+        projectDetailsContainer.scrollHeight + 'px';
+
+      popup.scrollTo(0, projectDetailsContainer.offsetTop);
+    }
+  }
 })();
 /*---------------------------------------------------
- Portfolio Filter Ends 
+ Portfolio Filter, PopUp Ends 
  ---------------------------------------------------*/

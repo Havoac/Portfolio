@@ -28,6 +28,10 @@ body {
   background-color: var(--bg-black-50);
 }
 
+body.hidden-scrolling {
+  overflow-y: hidden;
+}
+
 *:not(i) {
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
@@ -695,6 +699,11 @@ About Section
   transition: all 0.3s ease;
 }
 
+.portfolio-popup.open {
+  visibility: visible;
+  opacity: 1;
+}
+
 .portfolio-popup .pp-details {
   max-width: 1350px;
   width: 85%;
@@ -703,6 +712,10 @@ About Section
   overflow: hidden;
   opacity: 0;
   transition: all 0.3s ease;
+}
+
+.portfolio-popup .pp-details.active {
+  opacity: 1;
 }
 
 .portfolio-popup .pp-details-inner {
