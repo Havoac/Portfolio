@@ -1,8 +1,92 @@
+/*-------------------------------------------------
+ Navigation Menu Start 
+-------------------------------------------------*/
+
+(function () {
+  const hamburgerBtn = document.querySelector('.hamburger-btn');
+  const navMenu = document.querySelector('.nav-menu');
+  const closeNavBtn = navMenu.querySelector('.close-nav-menu');
+
+  hamburgerBtn.addEventListener('click', showNavMenu);
+  closeNavBtn.addEventListener('click', hideNavMenu);
+
+  function showNavMenu() {
+    navMenu.classList.add('open');
+    bodyScrollingToggle();
+  }
+
+  function hideNavMenu() {
+    navMenu.classList.remove('open');
+    fadeOutEffect();
+    bodyScrollingToggle();
+  }
+
+  function fadeOutEffect() {
+    document.querySelector('.fade-out-effect').classList.add('active');
+    setTimeout(function () {
+      document.querySelector('.fade-out-effect').classList.remove('active');
+    }, 300);
+  }
+
+  document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('link-item')) {
+      // Makes sure event.target.hash has a value before overridding default behaviour
+      if (event.target.hash !== '') {
+        event.preventDefault();
+
+        const hash = event.target.hash;
+
+        //deactivate existing active 'section'
+        document.querySelector('.section.active').classList.add('hide');
+        document.querySelector('.section.active').classList.remove('active');
+
+        //activate new 'section'
+        document.querySelector(hash).classList.add('active');
+        document.querySelector(hash).classList.remove('hide');
+
+        //deactivate existing active navigation menu 'link-item'
+        navMenu
+          .querySelector('.active')
+          .classList.add('outer-shadow', 'hover-in-shadow');
+        navMenu
+          .querySelector('.active')
+          .classList.remove('active', 'inner-shadow');
+
+        if (navMenu.classList.contains('open')) {
+          // //activate new active navigation menu 'link-item'
+          event.target.classList.add('active', 'inner-shadow');
+          event.target.classList.remove('outer-shadow', 'hover-in-shadow');
+
+          //hide navigation menu
+          hideNavMenu();
+        } else {
+          let navItems = navMenu.querySelectorAll('.link-item');
+          navItems.forEach(function (item) {
+            if (hash === item.hash) {
+              item.classList.add('active', 'inner-shadow');
+              item.classList.remove('outer-shadow', 'hover-in-shadow');
+            }
+          });
+          fadeOutEffect();
+        }
+
+        //add hash(#) to url
+        window.location.hash = hash;
+      }
+    }
+  });
+})();
+
+/*-------------------------------------------------
+ Navigation Menu End
+-------------------------------------------------*/
+
 /* ------------------------------------------------
 About Section Tabs Start
 -------------------------------------------------*/
 
 (function () {
+  const aboutSection = document.querySelector('.about-section');
   tabsContainer = document.querySelector('.about-tabs');
   tabsContainer.addEventListener('click', function (event) {
     /* If the tab you clicked on, is not active */
@@ -202,3 +286,16 @@ function bodyScrollingToggle() {
 /*---------------------------------------------------
  Portfolio Filter, PopUp Ends 
  ---------------------------------------------------*/
+
+/*--------------------------------------------------
+ Hide all sections except active
+--------------------------------------------------*/
+
+(function () {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(function (section) {
+    if (!section.classList.contains('active')) {
+      section.classList.add('hide');
+    }
+  });
+})();
