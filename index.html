@@ -3,6 +3,12 @@
     <title>Portfolio</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/skins/color-1.css" />
+
+    <!--------------------------------------------------------
+      Style Switcher 
+    --------------------------------------------------------->
+    <link rel="stylesheet" type="text/css" href="./css/style-switcher.css" />
+
     <!--------------------------------------------------------
       font-awesome 
     ---------------------------------------------------------->
@@ -362,7 +368,7 @@
                     <h3>Project Brief :</h3>
                     <p>
                       Tools Used : HTML, CSS, Javascript<br/><br/>
-                      <ul>
+                      <ul class="portfolio-item-description-contents">
                         <li>Integrated Light and Dark Mode</li>
                         <li>Implemented Neomorphism Design</li>
                         <li>Fully Responsive Layout</li>
@@ -399,7 +405,7 @@
                   <div class="description">
                     <h3>Project Brief :</h3>
                     <p>Tools Used : HTML, CSS, Javascript<br/><br/>
-                      <ul>
+                      <ul class="portfolio-item-description-contents">
                         You’ll have to guess the number between 1 to 20, it will give you sufficient hints to catch the correct number, and score you accordingly, you can also view the highest score and you cant reset the game at any time you want.</ul>
                        
                     </p>
@@ -433,7 +439,7 @@
                     <h3>Project Brief :</h3>
                     <p>
                       Tools Used : HTML, CSS, Javascript<br/><br/>
-                      <ul>You get a random number on a dice, the numbers would get added, except for the case if you got 1 then your sum would go to zero. Player who reaches 30 first wins.</ul>
+                      <ul class="portfolio-item-description-contents">You get a random number on a dice, the numbers would get added, except for the case if you got 1 then your sum would go to zero. Player who reaches 30 first wins.</ul>
                     </p>
                   </div>
                 </div>
@@ -465,7 +471,7 @@
                     <h3>Project Brief :</h3>
                     <p>
                       Tools Used : HTML, CSS, Javascript<br/><br/>
-                      <ul>
+                      <ul class="portfolio-item-description-contents">
                         Emoji will be changed onClick in the UI
                       </ul>
                     </p>
@@ -644,11 +650,25 @@
         <!-- pp navigation end -->
       </div>
     </div>
-    <!------------------------------------------------
+    <!--------------------------------------------------
       Portfolio Pop-Up end 
+    --------------------------------------------------->
+
+    <!--------------------------------------------------
+      Style Switcher Start 
+    --------------------------------------------------->
+    <div class="style-switcher outer-shadow">
+      <div class="day-night s-icon outer-shadow hover-in-shadow">
+        <i class="fas"></i>
+      </div>
+    </div>
+    <!-------------------------------------------------- 
+      Style Switcher End 
     --------------------------------------------------->
 
     <!-- Linking Js file -->
     <script src="js/main.js"></script>
+    <!-- Linking Style Switcher Js file -->
+    <script src="js/style-switcher.js"></script>
   </body>
 </html>
