@@ -582,6 +582,12 @@ About Section
 
 /*--------------------- Education Start--------------------------*/
 
+.about-section .experience {
+  padding-bottom: 80px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
 .about-section .education {
   padding-bottom: 80px;
 }
